@@ -1,0 +1,8 @@
+===== SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA L40S
+
+precision | latency(s) |  tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     0.9927 |      64.47 |        5.208
+int8     |     3.3993 |      18.83 |        0.774
+4bit     |     1.9066 |      33.57 |        1.292

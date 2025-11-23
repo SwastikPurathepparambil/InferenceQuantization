@@ -1,7 +1,7 @@
 ===== SEQ2SEQ SUMMARY (FP16 vs INT8 vs 4-bit) =====
 GPU: NVIDIA GeForce RTX 2080 Ti
 
-precision | latency(s) |      tok/s | peak_mem(GB)
+precision | latency(s) |  tokens/s | peak_mem(GB)
 --------------------------------------------------
 fp16     |     0.5302 |      11.32 |        0.542
 int8     |     0.7511 |       9.32 |        0.392

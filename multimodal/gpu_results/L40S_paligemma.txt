@@ -1,0 +1,8 @@
+===== PaLI-Gemma MULTIMODAL SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA L40S
+
+precision | latency(s) |  tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     0.5279 |      11.37 |        5.488
+int8     |     0.3438 |      17.45 |        3.355
+4bit     |     0.1290 |      46.53 |        2.235

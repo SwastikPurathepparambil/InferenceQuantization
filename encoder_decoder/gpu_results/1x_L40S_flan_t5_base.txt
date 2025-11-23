@@ -1,0 +1,8 @@
+===== SEQ2SEQ SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA L40S
+
+precision | latency(s) |  tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     0.6928 |       8.66 |        0.542
+int8     |     0.3832 |      18.27 |        0.392
+4bit     |     0.2244 |      40.11 |        0.321

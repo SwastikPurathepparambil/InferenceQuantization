@@ -1,7 +1,7 @@
 ===== PaLI-Gemma MULTIMODAL SUMMARY (FP16 vs INT8 vs 4-bit) =====
 GPU: NVIDIA GeForce RTX 2080 Ti
 
-precision | latency(s) |      tok/s | peak_mem(GB)
+precision | latency(s) |  tokens/s | peak_mem(GB)
 --------------------------------------------------
 fp16     |     0.4034 |      14.87 |        5.488
 int8     |     0.5624 |      10.67 |        3.356

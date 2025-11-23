@@ -1,0 +1,8 @@
+===== SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA GeForce RTX 2080 Ti
+
+precision | latency(s) |      tok/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     1.1781 |      54.32 |        2.315
+int8     |     2.9432 |      21.75 |        1.411
+4bit     |     1.7185 |      37.24 |        0.998

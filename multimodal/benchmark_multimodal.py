@@ -146,6 +146,7 @@ def run_benchmark(model, processor, prompt, image_path, max_new_tokens: int = 50
 
     return metrics, full_text
 
+# --------- ARGUMENTS ----------
 
 def parse_args():
 

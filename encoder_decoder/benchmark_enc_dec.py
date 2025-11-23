@@ -134,6 +134,7 @@ def run_benchmark(model, tokenizer, prompt, max_new_tokens: int = 50):
 
     return metrics, generated_text
 
+# --------- ARGUMENTS ----------
 
 def parse_args():
 

@@ -24,7 +24,9 @@ Models Tested:
 ## Environment Setup (Recommended) ##
 
 Create environment
+
 conda create -n quantbench python=3.10 -y
+
 conda activate quantbench
 
 ## Install dependencies ##

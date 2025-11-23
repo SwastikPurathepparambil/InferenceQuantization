@@ -27,7 +27,7 @@ Create environment
 conda create -n quantbench python=3.10 -y
 conda activate quantbench
 
-## 📦 3. Install dependencies ##
+## Install dependencies ##
 3.1 Install compatible NumPy
 
 Old packages crash on NumPy ≥1.25, so pin a stable version:

@@ -70,3 +70,41 @@ python benchmark_decoder.py \
   --precision 4bit \
   --model-id microsoft/phi-2 \
   --max-new-tokens 64
+
+## Key Conclusions
+
+### **4-bit quantization is the universal best choice**
+- Fastest throughput
+- Lowest VRAM usage
+- Works well on all GPUs
+- Often faster than FP16 and INT8
+
+### **L40S is the strongest GPU**
+- 2×–4× faster than 2080 Ti and Quadro 8000
+- Best INT8 and 4-bit performance
+- Best VRAM efficiency and memory bandwidth
+
+### **INT8 is inconsistent**
+- **Fast on Ada (L40S)**  
+- **Slower than FP16 on 2080 Ti and Quadro 8000**  
+
+### **FP16 is the stable baseline**
+- Best numerical stability and accuracy
+- Most predictable performance
+- Still strong on all GPUs
+
+----------------------
+
+## Per-Model Behavior
+
+### **Decoder-only models (Phi-2, LLaMA-3.2-1B)**
+- Quantized very well
+- 4-bit gives largest speedup
+
+### **Multimodal models (PaLI-Gemma)**
+- Very bandwidth-bound  
+- 4-bit produces very large performance gains
+
+### **Encoder–decoder models (Flan-T5)**
+- Less benefit from INT8
+- 4-bit still improves speed and VRAM

@@ -208,7 +208,7 @@ def main():
     gpu_name = torch.cuda.get_device_name(0)
 
     print("\n===== SUMMARY (FP16 vs INT8 vs 4-bit) =====\n")
-    header = f"{'precision':<8} | {'latency(s)':>10} | {'tok/s':>10} | {'peak_mem(GB)':>12}"
+    header = f"{'precision':<8} | {'latency(s)':>10} | {'tokens/s':>10} | {'peak_mem(GB)':>12}"
     print(header)
     print("-" * len(header))
 

@@ -1,7 +1,7 @@
 ===== SUMMARY (FP16 vs INT8 vs 4-bit) =====
 GPU: Quadro RTX 8000
 
-precision | latency(s) |      tok/s | peak_mem(GB)
+precision | latency(s) |  tokens/s | peak_mem(GB)
 --------------------------------------------------
 fp16     |     4.6352 |      13.81 |        5.208
 int8     |    14.5858 |       4.39 |        2.871

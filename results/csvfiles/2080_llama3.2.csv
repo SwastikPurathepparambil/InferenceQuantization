@@ -1,4 +1,4 @@
-precision,total_latency_sec,tokens_per_sec,per_token_latency_sec,generated_tokens,start_mem_gb,end_mem_gb,peak_mem_gb,error
+precision,latency_sec,tokens_per_sec,peak_mem_gb,error
 fp16,1.2951952010625973,49.41340112092251,2.3154397010803223,
 int8,3.0778299251105636,20.793871512475125,1.4106006622314453,
 4bit,1.966765956953168,32.54073001098013,0.9978299140930176,

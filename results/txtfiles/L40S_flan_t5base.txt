@@ -1,0 +1,19 @@
+===== SEQ2SEQ SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA L40S
+
+precision | latency(s) |   tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     0.4814 |      12.46 |        0.542
+int8     |     0.3961 |      17.67 |        0.392
+4bit     |     0.2428 |      37.07 |        0.321
+
+===== RESPONSES BY PRECISION =====
+
+Question: Explain quantization in simple terms.
+
+fp 16 answer: a metric unit is a unit of measurement.
+
+int8 answer: a quantity is a measure of the amount of something.
+
+nf4 answer: quantization is the measurement of the amount of a substance by volume.
+

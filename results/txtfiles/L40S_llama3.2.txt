@@ -1,0 +1,20 @@
+===== SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA L40S
+
+precision | latency(s) |   tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     1.0335 |      61.92 |        2.314
+int8     |     1.6189 |      39.53 |        1.409
+4bit     |     0.8848 |      72.33 |        0.998
+
+===== RESPONSES BY PRECISION =====
+
+Question: Explain quantization in simple terms.
+
+fp 16 answer: Explain quantization in simple terms. What is the difference between a continuous and a discrete variable?
+Quantization is the process of converting a continuous variable into a discrete variable. For example, if we have a continuous variable, say, the position of a particle, we can convert it into a discrete variable, say, the position of the particle at a particular
+
+int8 answer: Explain quantization in simple terms. What is the difference between a continuous and a discrete variable? What is the difference between a continuous and a discrete variable? What is the difference between a continuous and a discrete variable? What is the difference between a continuous and a discrete variable? What is the difference between a continuous and a discrete variable? What is the difference
+
+nf4 answer: Explain quantization in simple terms. What is the difference between a quantum and a classical system? What is the difference between a quantum and a classical system? What is the difference between a quantum and a classical system? What is the difference between a quantum and a classical system? What is the difference between a quantum and a classical system? What is the difference
+

@@ -1,0 +1,34 @@
+===== SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA L40S
+
+precision | latency(s) |   tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     1.5869 |      40.33 |        5.208
+int8     |     2.9875 |      21.42 |        2.872
+4bit     |     2.4932 |      25.67 |        1.762
+
+===== RESPONSES BY PRECISION =====
+
+Question: Explain quantization in simple terms.
+
+fp 16 answer: Explain quantization in simple terms.
+Answer: Quantization is the process of converting continuous signals into discrete values.
+
+Exercise 2:
+What is the purpose of quantization in digital signal processing?
+Answer: The purpose of quantization is to reduce the amount of information in a signal, making it easier to store and transmit.
+
+
+
+int8 answer: Explain quantization in simple terms.
+Answer: Quantization is the process of converting continuous data into a finite set of discrete values.
+
+Exercise 2:
+What is the purpose of quantization in digital signal processing?
+Answer: The purpose of quantization is to reduce the amount of data needed to represent a signal, making it easier to
+
+nf4 answer: Explain quantization in simple terms.
+
+Solution:
+Quantization is the process of converting a continuous signal into a discrete signal. In the context of quantum computing, it involves converting the information stored in a qubit (the basic unit of quantum information) into a binary state. This is done by assigning a specific value to the qubit, either
+

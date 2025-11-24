@@ -192,7 +192,7 @@ def main():
             }
 
             print("\n--- Generated Text ---")
-            print(generated_text[:500], "...\n")  # truncate for sanity
+            print(generated_text[:500], "...\n")
 
             print("--- Metrics ---")
             for k, v in metrics.items():
@@ -204,7 +204,6 @@ def main():
                     print(f"{k}: {v}")
             print("\n" + "=" * 60 + "\n")
 
-            # Free GPU memory for the next precision
             del model
             torch.cuda.empty_cache()
 
@@ -212,7 +211,6 @@ def main():
             print(f"[ERROR] Failed for precision '{prec}': {e}")
             all_results[prec] = {"error": str(e)}
 
-    # Summary table
     gpu_name = torch.cuda.get_device_name(0)
 
     print("\n===== SEQ2SEQ SUMMARY (FP16 vs INT8 vs 4-bit) =====\n")
@@ -220,7 +218,6 @@ def main():
     print(header)
     print("-" * len(header))
 
-    # Build text file content
     text_lines = []
     text_lines.append("===== SEQ2SEQ SUMMARY (FP16 vs INT8 vs 4-bit) =====\n")
     text_lines.append(f"GPU: {gpu_name}\n\n")
@@ -245,12 +242,58 @@ def main():
             print(row)
             text_lines.append(row + "\n")
 
-    # Write to text file
+    # ---------- NEW: CSV output (latency, tokens/s, peak mem only) ----------
+    import csv
+    csv_path = "seq2seq_benchmark_summary.csv"
+    with open(csv_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["precision", "latency_sec", "tokens_per_sec", "peak_mem_gb", "error"])
+
+        for prec in precisions:
+            res = all_results.get(prec, {})
+            metrics = res.get("metrics")
+            error = res.get("error")
+
+            if metrics is None:
+                writer.writerow([prec, "", "", "", error or "ERROR"])
+            else:
+                writer.writerow([
+                    prec,
+                    metrics["total_latency_sec"],
+                    metrics["tokens_per_sec"],
+                    metrics["peak_mem_gb"],
+                    ""
+                ])
+
+    print(f"[INFO] Saved CSV summary to {csv_path}")
+
+    # ---------- NEW: append response section ----------
+    label_map = {
+        "fp16": "fp 16",
+        "int8": "int8",
+        "4bit": "nf4",
+    }
+
+    text_lines.append("\n===== RESPONSES BY PRECISION =====\n\n")
+    text_lines.append(f"Question: {args.prompt}\n\n")
+
+    for prec in precisions:
+        res = all_results.get(prec, {})
+        answer = res.get("generated_text")
+        error = res.get("error")
+        label = label_map.get(prec, prec)
+
+        if answer is None:
+            text_lines.append(f"{label} answer: [ERROR: {error}]\n\n")
+        else:
+            text_lines.append(f"{label} answer: {answer}\n\n")
+
+    # Write updated text file
     text_path = "seq2seq_benchmark_summary.txt"
     with open(text_path, "w") as f:
         f.writelines(text_lines)
 
-    print(f"\n[INFO] Saved formatted summary text to {text_path}")
+    print(f"[INFO] Saved formatted summary text to {text_path}")
 
 
 if __name__ == "__main__":

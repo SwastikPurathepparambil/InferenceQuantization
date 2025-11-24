@@ -1,11 +1,12 @@
 import argparse
 import time
+import csv
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 
-DEFAULT_MODEL_ID = "microsoft/phi-2"
+DEFAULT_MODEL_ID = "meta-llama/Llama-3.2-1B"
 DEFAULT_PROMPT = "Explain quantization in simple terms."
 
 
@@ -238,12 +239,76 @@ def main():
             print(row)
             text_lines.append(row + "\n")
 
+    # ------ CSV addition ------
+    csv_path = "benchmark_summary.csv"
+    with open(csv_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "precision",
+            "total_latency_sec",
+            "tokens_per_sec",
+            "per_token_latency_sec",
+            "generated_tokens",
+            "start_mem_gb",
+            "end_mem_gb",
+            "peak_mem_gb",
+            "error",
+        ])
+
+        for prec in precisions:
+            res = all_results.get(prec, {})
+            metrics = res.get("metrics")
+            error = res.get("error")
+
+            if metrics is None:
+                writer.writerow([
+                    prec,
+                    "",
+                    "",
+                    "",
+                    error if error is not None else "ERROR",
+                ])
+            else:
+                writer.writerow([
+                    prec,
+                    metrics["total_latency_sec"],
+                    metrics["tokens_per_sec"],
+                    metrics["peak_mem_gb"],
+                    "",
+                ])
+
+    print(f"\n[INFO] Saved CSV summary to {csv_path}")
+
+    # ------ Question + answers section to TXT ------
+    text_lines.append("\n===== RESPONSES BY PRECISION =====\n\n")
+    text_lines.append(f"Question: {args.prompt}\n\n")
+
+    # Map internal precision names to desired labels in the TXT
+    label_map = {
+        "fp16": "fp 16",
+        "int8": "int8",
+        "4bit": "nf4",
+    }
+
+    for prec in precisions:
+        res = all_results.get(prec, {})
+        generated_text = res.get("generated_text")
+        error = res.get("error")
+        label = label_map.get(prec, prec)
+
+        if generated_text is None:
+            line = f"{label} answer: [ERROR: {error if error is not None else 'no output'}]\n\n"
+        else:
+            line = f"{label} answer: {generated_text}\n\n"
+
+        text_lines.append(line)
+
     # Write to text file
     text_path = "benchmark_summary.txt"
     with open(text_path, "w") as f:
         f.writelines(text_lines)
 
-    print(f"\n[INFO] Saved formatted summary text to {text_path}")
+    print(f"[INFO] Saved formatted summary text to {text_path}")
 
 
 if __name__ == "__main__":

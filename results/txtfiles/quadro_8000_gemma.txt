@@ -1,0 +1,22 @@
+===== PaLI-Gemma MULTIMODAL SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: Quadro RTX 8000
+
+precision | latency(s) |   tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     1.8059 |       3.32 |        5.488
+int8     |     1.1008 |       5.45 |        3.356
+4bit     |     0.5745 |      10.44 |        2.235
+
+===== RESPONSES BY PRECISION =====
+
+Question: <image>caption en
+
+fp 16 answer: caption en
+a woman with her dog
+
+int8 answer: caption en
+a woman with her dog
+
+nf4 answer: caption en
+a woman with her dog
+

@@ -265,6 +265,52 @@ def main():
             print(row)
             text_lines.append(row + "\n")
 
+    # -------- CSV summary (latency, tokens/s, peak mem, error) --------
+    import csv
+    csv_path = "paligemma_benchmark_summary.csv"
+    with open(csv_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["precision", "latency_sec", "tokens_per_sec", "peak_mem_gb", "error"])
+
+        for prec in precisions:
+            res = all_results.get(prec, {})
+            metrics = res.get("metrics")
+            error = res.get("error")
+
+            if metrics is None:
+                writer.writerow([prec, "", "", "", error if error is not None else "ERROR"])
+            else:
+                writer.writerow([
+                    prec,
+                    metrics["total_latency_sec"],
+                    metrics["tokens_per_sec"],
+                    metrics["peak_mem_gb"],
+                    "",
+                ])
+
+    print(f"\n[INFO] Saved CSV summary to {csv_path}")
+
+    # -------- Responses section (question + answers) --------
+    label_map = {
+        "fp16": "fp 16",
+        "int8": "int8",
+        "4bit": "nf4",
+    }
+
+    text_lines.append("\n===== RESPONSES BY PRECISION =====\n\n")
+    text_lines.append(f"Question: {args.prompt}\n\n")
+
+    for prec in precisions:
+        res = all_results.get(prec, {})
+        generated_text = res.get("generated_text")
+        error = res.get("error")
+        label = label_map.get(prec, prec)
+
+        if generated_text is None:
+            text_lines.append(f"{label} answer: [ERROR: {error if error is not None else 'no output'}]\n\n")
+        else:
+            text_lines.append(f"{label} answer: {generated_text}\n\n")
+
     # Write to text file
     text_path = "paligemma_benchmark_summary.txt"
     with open(text_path, "w") as f:

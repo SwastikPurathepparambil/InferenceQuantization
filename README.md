@@ -25,9 +25,9 @@ Inference is often bottlenecked by:
 
 Quantizing the weights allows us to **reduce the pressure on the memory bandwidth**. For example, let's say we have a model that has 2 GBs in model weights in **16 bit representation**. If our bandwidth is 1 GB/s and if we have to load all our weights, then that process will take **2 seconds**. If, however, we quantize to a **4 bit representation**, then our model weights will take up 0.5 GB. Thus the process will take **0.5 seconds**! *This is the usefulness of quantization.*
 
-# Key Coding Libraries/Classes Used
+## Key Coding Libraries/Classes Used
 
-## Transformers
+### Transformers
 
 This is the Hugging Face library that **provides pretrained models** (LLMs, vision, audio, multimodal) so you can generate results from them directly.
 
@@ -39,7 +39,7 @@ Loads GPT-style decoder-only models.
 
 Makes sure the model tokenizes properly with the model provided.
 
-## BitsAndBytesConfig
+### BitsAndBytesConfig
 
 If there is no config for 8 bit or 4 bit, then nothing.
 
@@ -82,7 +82,7 @@ The scales that quantize and dequantize to 4 bit and into 16-bit respectively AR
 
 This saves about 20-30% more in terms of memory and very minimal change in accuracy.
 
-## Torch
+### Torch
 
 **torch.cuda_is_available()** → Checks if PyTorch can see a CUDA-capable GPU.
 

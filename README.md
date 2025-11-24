@@ -172,13 +172,12 @@ python benchmark_decoder.py \
 
 ## Key Conclusions
 
-### **4-bit quantization wins**
+### **4-bit quantization works very well on all three GPUs**
 - Fastest throughput
 - Lowest VRAM usage
-- Works well on all GPUs
-- Often faster than FP16 and INT8
+- Usually faster than FP16 and INT8
 
-### **L40S had the best performance**
+### **L40S performs the best out of the three**
 - 2×–4× faster than 2080 Ti and Quadro 8000
 - Best INT8 and 4-bit performance
 - Best VRAM efficiency and memory bandwidth
@@ -186,11 +185,6 @@ python benchmark_decoder.py \
 ### **INT8 is inconsistent**
 - **Fast on Ada (L40S)**  
 - **Slower than FP16 on 2080 Ti and Quadro 8000**  
-
-### **FP16 is the most reliable**
-- Best numerical stability and accuracy
-- Most predictable performance
-- Still strong on all GPUs
 
 ----------------------
 

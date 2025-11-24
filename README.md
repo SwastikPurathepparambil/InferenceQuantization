@@ -186,7 +186,6 @@ python benchmark_decoder.py \
 - **Fast on Ada (L40S)**  
 - **Slower than FP16 on 2080 Ti and Quadro 8000**  
 
-----------------------
 
 ## Per-Model Behavior
 

@@ -172,26 +172,16 @@ python benchmark_decoder.py \
 
 ## Key Conclusions
 
-### **L40S performs the best out of the three**
-- 2×–4× faster than 2080 Ti and Quadro 8000
-- Best INT8 and 4-bit performance
-- Best VRAM efficiency and memory bandwidth
-
 ### **INT8 is inconsistent**
-- **Fast on Ada (L40S)**  
-- **Slower than FP16 on 2080 Ti and Quadro 8000**  
+- Fast on L40S  
+- Slower than FP16 on 2080 Ti and Quadro 8000
 
+### **Phi-2 and Llama 3.2 don't show throghput improvements for 8 and 4 bit**
+- fp16 showed better throughput on almost all combinations of GPUs and models
+- Only llama 3.2 4-bit showed an improvement from fp16
+- all int8 results showed to have less throughput
 
-## Per-Model Behavior
-
-### **Decoder-only models (Phi-2, LLaMA-3.2-1B)**
-- Quantized very well
-- 4-bit gives largest speedup
-
-### **Multimodal models (PaLI-Gemma)**
-- Very bandwidth-bound  
+### **Multimodal Result (PaLI-Gemma)** 
 - 4-bit produces very large performance gains
+- One of the models that shows int8 actually has higher throughput
 
-### **Encoder–decoder models (Flan-T5)**
-- Less benefit from INT8
-- 4-bit still improves speed and VRAM

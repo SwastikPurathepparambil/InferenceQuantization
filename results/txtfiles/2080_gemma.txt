@@ -1,0 +1,22 @@
+===== PaLI-Gemma MULTIMODAL SUMMARY (FP16 vs INT8 vs 4-bit) =====
+GPU: NVIDIA GeForce RTX 2080 Ti
+
+precision | latency(s) |   tokens/s | peak_mem(GB)
+--------------------------------------------------
+fp16     |     0.4382 |      13.69 |        5.488
+int8     |     0.6350 |       9.45 |        3.356
+4bit     |     0.2651 |      22.64 |        2.235
+
+===== RESPONSES BY PRECISION =====
+
+Question: <image>caption en
+
+fp 16 answer: caption en
+a woman with her dog
+
+int8 answer: caption en
+a woman with her dog
+
+nf4 answer: caption en
+a woman with her dog
+

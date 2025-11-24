@@ -5,8 +5,9 @@ import csv
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-
-DEFAULT_MODEL_ID = "meta-llama/Llama-3.2-1B"
+# microsoft/phi-2
+# meta-llama/Llama-3.2-1B
+DEFAULT_MODEL_ID = "microsoft/phi-2"
 DEFAULT_PROMPT = "Explain quantization in simple terms."
 
 
